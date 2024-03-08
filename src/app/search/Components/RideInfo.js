@@ -5,7 +5,6 @@ import { FaArrowRight } from "react-icons/fa";
 import { FaPersonFalling } from "react-icons/fa6";
 
 export default function RideInfo({ loading, rideInfo }) {
-  console.log(loading, rideInfo);
   if (loading) {
     return (
       <div className="w-full h-[40vh] flex justify-center items-center animate-ping">
@@ -30,7 +29,10 @@ export default function RideInfo({ loading, rideInfo }) {
   if (rideInfo && rideInfo.length !== 0) {
     return rideInfo.map((ele) => {
       return (
-        <div className="flex p-[2%] flex-wrap flex-col gap-8 font-dm shadow-md font-bold">
+        <div
+          className="flex p-[2%] flex-wrap flex-col gap-8 font-dm shadow-md font-bold"
+          key={ele._id}
+        >
           <div className="font-bold flex items-center gap-3">
             <p>{ele.start}</p>
             <FaArrowRight />

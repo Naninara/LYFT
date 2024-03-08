@@ -16,7 +16,7 @@ export default async function Navbar() {
   const session = await getServerSession(options);
 
   return (
-    <div className="flex items-center justify-between p-[1%] px-4 border-b-2 border-gray-500 ">
+    <div className="flex items-center justify-between p-[1%] px-4 border-b-2 sticky bg-white top-0 border-gray-500 ">
       <Link href={"/"}>
         <div>
           <svg

@@ -5,8 +5,6 @@ export async function POST(request) {
     await connectDb();
     const requestBody = await request.json();
 
-    console.log(requestBody);
-
     if (!requestBody.start || !requestBody.end || !requestBody.date) {
       return new Response("Bad Request", { status: 400 });
     }

@@ -4,7 +4,7 @@ import { options } from "../api/auth/[...nextauth]/options";
 
 import LoginForm from "./Components/LoginForm";
 
-export default async function page() {
+export default async function page({ searchParams }) {
   const session = await getServerSession(options);
   return (
     <div className="flex justify-center items-center w-full h-[90vh] bg-[#F4F4FA] font-dm">
@@ -15,7 +15,7 @@ export default async function page() {
             Sign In To Access Our Services
           </p>
         </div>
-        <LoginForm />
+        <LoginForm url={searchParams} />
       </div>
     </div>
   );

@@ -2,19 +2,25 @@
 import React, { useEffect, useState } from "react";
 import { CiLocationArrow1, CiLocationOn } from "react-icons/ci";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
-import { FaMale } from "react-icons/fa";
-import { FaArrowRight, FaCar } from "react-icons/fa6";
+import { FaFemale, FaMale } from "react-icons/fa";
+import { FaArrowRight, FaCar, FaMotorcycle } from "react-icons/fa6";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import Loading from "@/app/Components/Loading";
 
 export default function PublishComponent() {
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
   const [date, setDate] = useState(null);
   const [fair, setFair] = useState(null);
+  const [loading, setLoading] = useState(null);
+
+  const [personalDetails, setPersonalDetails] = useState({});
+
+  //getting logged in session data from NextAuth
   const { data, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -22,6 +28,7 @@ export default function PublishComponent() {
     },
   });
 
+  //Function to Publish A Ride Into Public
   function PostRide() {
     if (!start || !end || !date || !fair || !data.user.email) {
       toast.error("All details must be filled");
@@ -48,20 +55,46 @@ export default function PublishComponent() {
     );
   }
 
-  return status == "loading" ? (
-    <div className="flex w-full h-[80vh] justify-center items-center animate-ping">
-      <svg
-        width="60"
-        height="60"
-        viewBox="0 0 32 32"
-        aria-hidden="true"
-        focusable="false"
-        data-testid="core-ui-icon-lyft"
-      >
-        <path d="M12.816 11.368h3.813v8.559c0 1.595-.555 2.92-1.596 3.826-.933.812-2.23 1.258-3.65 1.258-.906 0-1.826-.19-2.677-.528v-3.38c.121.068.23.122.23.122.567.27 1.176.42 1.784.42.595 0 1.109-.136 1.514-.393.433-.27.69-.662.744-1.122a3.187 3.187 0 0 1-2.055.757 3.182 3.182 0 0 1-3.177-3.177v-6.342h3.812v5.07c0 .488.555.853 1.069.488a.482.482 0 0 0 .202-.406v-5.152h-.013ZM6.8 17.71c0 1.027.324 1.933.946 2.623.04.04.135.148.135.148s-.108.068-.162.095a3.276 3.276 0 0 1-1.393.311C4.717 20.887 3 19.697 3 17.074V7.556h3.8V17.71Zm20.929-2.529v.636c0 .69.554 1.27 1.27 1.27v3.814h-.161c-1.312-.041-2.542-.555-3.448-1.46-.947-.947-1.46-2.232-1.46-3.61v-3.489c0-.92-.987-1.623-1.974-1.082a1.141 1.141 0 0 0-.568.987v1.041h1.582v3.786h-1.582a3.78 3.78 0 0 1-1.068 2.637 3.732 3.732 0 0 1-2.583 1.162h-.148v-8.64c0-1.879 1.433-3.988 3.19-4.637 3.164-1.176 6.301.784 6.869 3.772H29v3.813h-1.271Z"></path>
-      </svg>
-    </div>
-  ) : (
+  useEffect(() => {
+    setLoading(true);
+    if (data) {
+      axios
+        .get(
+          `http://localhost:3000/api/personaldetails?email=${data.user.email}`
+        )
+        .then((response) => {
+          setPersonalDetails(response.data);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }, [data]);
+
+  if (status == "loading" || loading) {
+    return <Loading />;
+  }
+
+  if (!personalDetails) {
+    return (
+      <div className="flex w-full items-center justify-center flex-col font-dm h-[30vh] p-8 gap-4 text-pretty">
+        <p className=" font-extrabold text-xl">
+          Looks Like We Dont Have Personal details Please Update Your Details To
+          Post Rides
+        </p>
+        <Link
+          href={"/profile"}
+          className="flex items-center gap-2 text-lg text-green-500"
+        >
+          <p>Update Here</p>
+          <FaArrowRight />
+        </Link>
+      </div>
+    );
+  }
+
+  return (
     <div className="flex flex-col font-dm">
       <div className="p-[2%] pt-5 flex flex-col md:flex-row md:p-[2%] w-full items-center justify-center gap-4 ">
         <div className="flex items-center gap-2 w-full md:w-[400px]">
@@ -94,23 +127,47 @@ export default function PublishComponent() {
         <input
           type={"date"}
           className="w-auto border-gray-200 p-[1%] rounded-md border-2 h-[39px] w-[250px]"
-          placeholder="On When"
           onChange={(e) => {
             setDate(e.target.value);
           }}
+          min={new Date().toISOString().split("T")[0]}
+        />
+        <input
+          type={"text"}
+          className="w-auto  border-gray-200 p-[1%] rounded-md border-2 h-[39px] w-[250px]"
+          placeholder="On When XX:YY am/pm"
         />
       </div>
       <div className="flex-col md:flex-row flex w-full items-center justify-center gap-9">
         <p>
-          By <b>Mavin Nara</b>
+          By <b>{data.user.name}</b>
         </p>
+
         <p className="flex items-center">
-          Gender:<b> Male</b> <FaMale size={20} />
+          Gender:
+          {personalDetails.gender === "male" ? (
+            <>
+              <b> Male</b> <FaMale size={20} />
+            </>
+          ) : (
+            <>
+              <b> Female</b> <FaFemale size={20} />
+            </>
+          )}
         </p>
         <p className="flex items-center gap-3">
-          Vehicle Number: <b>AP05-CQ-1234</b> <FaCar size={20} />
+          Vehicle Number:{" "}
+          {personalDetails.vehicleType == "Two Wheeler" ? (
+            <>
+              {personalDetails.vehicleNumber} <FaMotorcycle />
+            </>
+          ) : (
+            <>
+              {personalDetails.vehicleNumber} <FaCar />
+            </>
+          )}
         </p>
-        <Link href={"/personal"}>
+        <Link href={"/profile"}>
           <button className="flex items-center gap-2">
             Update Details <FaArrowRight />
           </button>

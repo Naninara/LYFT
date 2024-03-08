@@ -22,8 +22,8 @@ export default function MoreInfoSection() {
         </h1>
         <div className="text-[16px] font-dm ">
           <p>
-            A ride is more than just a ride. It's a gateway to opportunities and
-            jobs. A connection to community. And access to essentials like
+            A ride is more than just a ride. It is a gateway to opportunities
+            and jobs. A connection to community. And access to essentials like
             groceries, healthcare, and polling places. Our Lyft Up initiative
             makes rides more accessible for millions, and helps bring
             communities even closer.

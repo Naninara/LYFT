@@ -1,10 +1,41 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { FaArrowRight, FaGithub, FaGoogle } from "react-icons/fa6";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { toast } from "react-hot-toast";
 
-export default function LoginForm() {
+export default function LoginForm({ url }) {
+  const [inputData, setInputData] = useState(null);
+  console.log(url);
+
+  function handleChange(e) {
+    setInputData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  }
+
+  function SignInUsingCredentails(e) {
+    e.preventDefault();
+
+    if (!inputData?.email || !inputData?.password) {
+      toast.error("Email and password must filled");
+      return;
+    }
+
+    toast.promise(
+      signIn("credentials", {
+        ...inputData,
+        callbackUrl: url.callbackUrl ? url.callbackUrl : "/",
+      }),
+      {
+        success: "Logged In Succesfully",
+        error: "invalid credentials",
+        loading: "Loading....",
+      }
+    );
+  }
   return (
     <form className="flex flex-col gap-4">
       <div>
@@ -13,6 +44,8 @@ export default function LoginForm() {
           type={"text"}
           className="w-full h-[40px] border-2 border-black rounded-lg px-3"
           placeholder="Enter Your Email"
+          name="email"
+          onChange={(e) => handleChange(e)}
         />
       </div>
       <div>
@@ -21,6 +54,8 @@ export default function LoginForm() {
           type={"text"}
           className="w-full h-[40px] border-2 border-black rounded-lg px-3"
           placeholder="Enter Your Password"
+          name="password"
+          onChange={(e) => handleChange(e)}
         />
       </div>
 
@@ -54,7 +89,12 @@ export default function LoginForm() {
           <FaArrowRight />
         </Link>
       </div>
-      <button className="w-full bg-black h-[40px] rounded-sm text-white flex justify-center items-center gap-2">
+      <button
+        className="w-full bg-black h-[40px] rounded-sm text-white flex justify-center items-center gap-2"
+        onClick={(e) => {
+          SignInUsingCredentails(e);
+        }}
+      >
         {" "}
         Go Ahead <FaArrowRight />
       </button>
