@@ -79,6 +79,48 @@ export default function PublishComponent() {
   if (!personalDetails) {
     return (
       <div className="flex w-full items-center justify-center flex-col font-dm h-[30vh] p-8 gap-4 text-pretty">
+        <div className="p-[2%] pt-5 flex flex-col md:flex-row md:p-[2%] w-full items-center justify-center gap-4 ">
+          <div className="flex items-center gap-2 w-full md:w-[400px]">
+            <CiLocationOn size={25} />
+
+            <GooglePlacesAutocomplete
+              apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}
+              debounce={1000}
+              selectProps={{
+                start,
+                className: "w-full",
+                placeholder: "From Where",
+                onChange: setStart,
+              }}
+            />
+          </div>
+          <div className="flex items-center gap-2 w-full md:w-[400px]">
+            <CiLocationArrow1 size={25} />
+            <GooglePlacesAutocomplete
+              apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}
+              debounce={1000}
+              selectProps={{
+                end,
+                onChange: setEnd,
+                className: "w-full",
+                placeholder: "Where to..",
+              }}
+            />
+          </div>
+          <input
+            type={"date"}
+            className="w-auto border-gray-200 p-[1%] rounded-md border-2 h-[39px] w-[250px]"
+            onChange={(e) => {
+              setDate(e.target.value);
+            }}
+            min={new Date().toISOString().split("T")[0]}
+          />
+          <input
+            type={"text"}
+            className="w-auto  border-gray-200 p-[1%] rounded-md border-2 h-[39px] w-[250px]"
+            placeholder="On When XX:YY am/pm"
+          />
+        </div>
         <p className=" font-extrabold text-xl">
           Looks Like We Dont Have Personal details Please Update Your Details To
           Post Rides
@@ -156,7 +198,7 @@ export default function PublishComponent() {
           )}
         </p>
         <p className="flex items-center gap-3">
-          Vehicle Number:{" "}
+          Vehicle Number:
           {personalDetails.vehicleType == "Two Wheeler" ? (
             <>
               {personalDetails.vehicleNumber} <FaMotorcycle />

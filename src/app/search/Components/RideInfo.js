@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { FaPersonFalling } from "react-icons/fa6";
@@ -29,37 +30,39 @@ export default function RideInfo({ loading, rideInfo }) {
   if (rideInfo && rideInfo.length !== 0) {
     return rideInfo.map((ele) => {
       return (
-        <div
-          className="flex p-[2%] flex-wrap flex-col gap-8 font-dm shadow-md font-bold"
-          key={ele._id}
-        >
-          <div className="font-bold flex items-center gap-3">
-            <p>{ele.start}</p>
-            <FaArrowRight />
-            <p>{ele.end}</p>
-          </div>
-          <div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <p>
-                  {ele.user.image ? (
-                    <Image
-                      src={ele.user.image}
-                      alt="profile"
-                      width={50}
-                      height={50}
-                      className="rounded-full"
-                    />
-                  ) : (
-                    <FaPersonFalling size={20} />
-                  )}
-                </p>
-                <p>Posted By: {ele.user.name}</p>
+        <Link href={`/search/${ele._id}`}>
+          <div
+            className="flex p-[2%] flex-wrap flex-col gap-8 font-dm shadow-md font-bold"
+            key={ele._id}
+          >
+            <div className="font-bold flex items-center gap-3">
+              <p>{ele.start}</p>
+              <FaArrowRight />
+              <p>{ele.end}</p>
+            </div>
+            <div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <p>
+                    {ele.user.image ? (
+                      <Image
+                        src={ele.user.image}
+                        alt="profile"
+                        width={50}
+                        height={50}
+                        className="rounded-full"
+                      />
+                    ) : (
+                      <FaPersonFalling size={20} />
+                    )}
+                  </p>
+                  <p>Posted By: {ele.user.name}</p>
+                </div>
+                <div>₹{ele.rideAmount}</div>
               </div>
-              <div>₹{ele.rideAmount}</div>
             </div>
           </div>
-        </div>
+        </Link>
       );
     });
   }

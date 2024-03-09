@@ -1,9 +1,9 @@
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentailsProvider from "next-auth/providers/credentials";
-import UserModel from "../../../../../Models/UserModel";
+import UserModel from "../../../../Models/UserModel";
 import mongoose from "mongoose";
-import connectDb from "../../../../../lib/connectDb";
+import connectDb from "../../../../lib/connectDb";
 import axios from "axios";
 import { redirect } from "next/dist/server/api-utils";
 import { toast } from "react-hot-toast";

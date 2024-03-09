@@ -1,6 +1,6 @@
-import connectDb from "../../../../../lib/connectDb";
-import PersonalDetailsShema from "../../../../../Models/PersonalDetails";
-import User from "../../../../../Models/UserModel";
+import connectDb from "@/lib/connectDb";
+import PersonalDetailsShema from "@/Models/PersonalDetails";
+import User from "@/Models/UserModel";
 
 export async function POST(request) {
   try {

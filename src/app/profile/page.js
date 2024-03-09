@@ -7,6 +7,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { FaArrowRight, FaHand } from "react-icons/fa6";
 import Loading from "../Components/Loading";
 import { PiHandWavingThin } from "react-icons/pi";
+import { toast } from "react-hot-toast";
 
 export default function Profilepage(params) {
   const [personalData, setPersonalData] = useState(null);
@@ -32,6 +33,44 @@ export default function Profilepage(params) {
 
   if (status == "loading" || loading) {
     return <Loading />;
+  }
+
+  function handleChange(e) {
+    setPersonalData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+    console.log(personalData);
+  }
+
+  function handleSubmit() {
+    if (
+      !personalData?.phonenumber ||
+      !personalData?.vehicleType ||
+      !personalData?.gender ||
+      !personalData?.vehicleNumber
+    ) {
+      toast.error("All Fields Must Be filled");
+      return;
+    }
+
+    toast
+      .promise(
+        axios.post("http://localhost:3000/api/personaldetails", {
+          ...personalData,
+          email: data.user.email,
+        }),
+        {
+          loading: "Updating Data",
+          success: "Updated Sucessfully",
+          error: "Something Wrong",
+        }
+      )
+
+      .then((response) => {
+        setPersonalData(response.data);
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -67,6 +106,7 @@ export default function Profilepage(params) {
                 className="w-full h-[40px] border-2 border-black rounded-lg px-3"
                 placeholder="Enter Your Phone Number"
                 name="phonenumber"
+                value={personalData?.phonenumber}
                 onChange={(e) => {
                   handleChange(e);
                 }}
@@ -80,6 +120,7 @@ export default function Profilepage(params) {
                 className="w-[288px] md:w-[243px] h-[40px] border-2 border-black rounded-lg px-3"
                 placeholder="Enter Your Password"
                 name="vehicleType"
+                value={personalData?.vehicleType}
                 onChange={(e) => {
                   handleChange(e);
                 }}
@@ -98,7 +139,7 @@ export default function Profilepage(params) {
                 required
                 className="w-full  border-2 border-black rounded-lg px-3"
                 name="gender"
-                value={"female"}
+                value={"male"}
                 onChange={(e) => {
                   handleChange(e);
                 }}
@@ -110,7 +151,7 @@ export default function Profilepage(params) {
                 required
                 className="w-full border-2 border-black rounded-lg px-3 ml-2"
                 name="gender"
-                value={"male"}
+                value={"female"}
                 onChange={(e) => {
                   handleChange(e);
                 }}
@@ -135,6 +176,7 @@ export default function Profilepage(params) {
             <input
               type={"text"}
               required
+              value={personalData?.vehicleNumber}
               className="w-full h-[40px] border-2 border-black rounded-lg px-3"
               placeholder="Enter Vehicle Number"
               name="vehicleNumber"
@@ -147,6 +189,9 @@ export default function Profilepage(params) {
             <button
               type="submit"
               className="w-full bg-black h-[40px] rounded-sm text-white flex justify-center items-center gap-2"
+              onClick={() => {
+                handleSubmit();
+              }}
             >
               Go Ahead <FaArrowRight />
             </button>

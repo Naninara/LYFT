@@ -1,4 +1,4 @@
-import connectDb from "../../../../lib/connectDb";
+import connectDb from "@/lib/connectDb";
 
 export async function GET() {
   await connectDb()

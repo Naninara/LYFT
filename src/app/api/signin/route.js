@@ -1,6 +1,5 @@
-import connectDb from "../../../../lib/connectDb";
-import User from "../../../../Models/UserModel";
-
+import connectDb from "@/lib/connectDb";
+import User from "@/Models/UserModel";
 export async function POST(request) {
   try {
     await connectDb();

@@ -1,5 +1,5 @@
-import connectDb from "../../../../lib/connectDb";
-import PersonalDetailsShema from "../../../../Models/PersonalDetails";
+import connectDb from "@/lib/connectDb";
+import PersonalDetailsShema from "@/Models/PersonalDetails";
 
 export async function GET({ url }) {
   try {
@@ -15,6 +15,28 @@ export async function GET({ url }) {
 
     return Response.json(PersonalDetails, { status: 200 });
   } catch (err) {
+    console.log(err);
     return Response.json(err, { status: 400 });
+  }
+}
+
+export async function POST(request) {
+  try {
+    await connectDb();
+    const requestData = await request.json();
+
+    const { email, gender, vehicleNumber, vehicleType, phonenumber } =
+      requestData;
+    const data = await PersonalDetailsShema.updateOne(
+      { email: email },
+      { email, gender, vehicleNumber, vehicleType, phonenumber },
+      { upsert: true }
+    )
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+    return Response.json(requestData, { status: 200 });
+  } catch (err) {
+    console.log(err);
+    return new Response("Bad Request", { status: 400 });
   }
 }

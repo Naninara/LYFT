@@ -1,5 +1,5 @@
-import connectDb from "../../../../lib/connectDb";
-import User from "../../../../Models/UserModel";
+import connectDb from "@/lib/connectDb";
+import User from "../../../Models/UserModel";
 export async function POST(request) {
   const data = await request.json();
   const { name, email, image, provider, type } = data;
