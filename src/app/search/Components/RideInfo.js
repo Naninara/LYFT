@@ -44,9 +44,9 @@ export default function RideInfo({ loading, rideInfo }) {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <p>
-                    {ele.user.image ? (
+                    {ele?.user?.image ? (
                       <Image
-                        src={ele.user.image}
+                        src={ele?.user?.image}
                         alt="profile"
                         width={50}
                         height={50}
@@ -56,9 +56,9 @@ export default function RideInfo({ loading, rideInfo }) {
                       <FaPersonFalling size={20} />
                     )}
                   </p>
-                  <p>Posted By: {ele.user.name}</p>
+                  <p>Posted By: {ele?.user?.name}</p>
                 </div>
-                <div>₹{ele.rideAmount}</div>
+                <div>₹{ele?.rideAmount}</div>
               </div>
             </div>
           </div>

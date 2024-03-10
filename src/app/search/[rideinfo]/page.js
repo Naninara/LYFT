@@ -36,6 +36,7 @@ export default async function page({ params: { rideinfo } }) {
           <p>Owner Details:</p>
         </div>
         <div className="flex justify-center items-center gap-2 md:gap-5 flex-col md:flex-row">
+          <p>Name: {data.postedBy.name}</p>
           <p>Gender: {data.postedBy.gender}</p>
           <p>Vehicle Number: {data.postedBy.vehicleNumber}</p>
           <p>Vehical Type: {data.postedBy.vehicleType}</p>

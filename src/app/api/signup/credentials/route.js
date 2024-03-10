@@ -36,6 +36,7 @@ export async function POST(request) {
       vehicleNumber,
       vehicleType,
       phonenumber,
+      name,
     });
 
     if (!PersonalDetailsResponse) {

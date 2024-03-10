@@ -1,12 +1,18 @@
 import connectDb from "@/lib/connectDb";
 import BookingModel from "@/Models/BookingModel";
 
-export async function GET(request) {
+async function getId(url) {
+  const data = new URL(url);
+  const id = await data.searchParams.get("id");
+
+  return id;
+}
+
+export async function GET({ url }) {
   try {
     await connectDb();
-    const url = new URL(request.url);
 
-    const id = await url.searchParams.get("id");
+    const id = await getId(url);
 
     const aggregationPipeLine = [
       [
@@ -30,6 +36,7 @@ export async function GET(request) {
     ];
 
     const data = await BookingModel.aggregate(aggregationPipeLine);
+
     return Response.json(data, { status: 200 });
   } catch (error) {
     console.log(error);

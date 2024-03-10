@@ -1,12 +1,19 @@
 import connectDb from "@/lib/connectDb";
 import RideModel from "@/Models/RideModel";
 
-export async function GET(request) {
+async function getEmail(url) {
+  const data = new URL(url);
+
+  const email = data.searchParams.get("email");
+
+  return email;
+}
+
+export async function GET({ url }) {
   try {
     await connectDb();
-    const url = new URL(request.url);
 
-    const email = await url.searchParams.get("email");
+    const email = await getEmail(url);
 
     const aggregationPipeLine = [
       {
@@ -39,6 +46,7 @@ export async function GET(request) {
 
     return Response.json(response, { status: 200 });
   } catch (error) {
+    console.log(error);
     return Response.json(error, { status: 400 });
   }
 }
