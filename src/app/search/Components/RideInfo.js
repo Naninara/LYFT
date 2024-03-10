@@ -30,7 +30,7 @@ export default function RideInfo({ loading, rideInfo }) {
   if (rideInfo && rideInfo.length !== 0) {
     return rideInfo.map((ele) => {
       return (
-        <Link href={`/search/${ele._id}`}>
+        <Link href={`/search/${ele._id}`} key={ele._id}>
           <div
             className="flex p-[2%] flex-wrap flex-col gap-8 font-dm shadow-md font-bold"
             key={ele._id}

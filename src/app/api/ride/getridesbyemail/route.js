@@ -6,8 +6,7 @@ export async function GET(request) {
     await connectDb();
     const url = new URL(request.url);
 
-    const email = url.searchParams.get("email");
-    console.log(email);
+    const email = await url.searchParams.get("email");
 
     const aggregationPipeLine = [
       {
@@ -40,6 +39,6 @@ export async function GET(request) {
 
     return Response.json(response, { status: 200 });
   } catch (error) {
-    return Response.json(response, { status: 400 });
+    return Response.json(error, { status: 400 });
   }
 }

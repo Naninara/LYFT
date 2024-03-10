@@ -6,7 +6,7 @@ export async function GET(request) {
     await connectDb();
     const url = new URL(request.url);
 
-    const id = url.searchParams.get("id");
+    const id = await url.searchParams.get("id");
 
     const aggregationPipeLine = [
       [
