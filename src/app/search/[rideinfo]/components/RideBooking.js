@@ -18,7 +18,7 @@ export default function RideBooking({ postedEmail, RideId }) {
     toast.loading("Checking Details", { duration: 1000 });
 
     const personaldetails = await axios.get(
-      `http://localhost:3000/api/personaldetails?email=${data.user.email}`
+      `https://lyft-beta.vercel.app/api/personaldetails?email=${data.user.email}`
     );
 
     if (!personaldetails.data) {
@@ -32,7 +32,7 @@ export default function RideBooking({ postedEmail, RideId }) {
 
     toast
       .promise(
-        axios.post("http://localhost:3000/api/booking", {
+        axios.post("https://lyft-beta.vercel.app/api/booking", {
           postedEmail,
           RideId,
           userEmail: data.user.email,

@@ -36,7 +36,7 @@ export default function PublishComponent() {
       return;
     }
     toast.promise(
-      axios.post("http://localhost:3000/api/ride", {
+      axios.post("https://lyft-beta.vercel.app/api/ride", {
         start: start.label,
         end: end.label,
         date,
@@ -62,7 +62,7 @@ export default function PublishComponent() {
     if (data) {
       axios
         .get(
-          `http://localhost:3000/api/personaldetails?email=${data.user.email}`
+          `https://lyft-beta.vercel.app/api/personaldetails?email=${data.user.email}`
         )
         .then((response) => {
           setPersonalDetails(response.data);

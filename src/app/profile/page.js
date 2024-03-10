@@ -23,7 +23,7 @@ export default function Profilepage(params) {
       setLoading(true);
       axios
         .get(
-          `http://localhost:3000/api/personaldetails?email=${data.user.email}`
+          `https://lyft-beta.vercel.app/api/personaldetails?email=${data.user.email}`
         )
         .then((response) => setPersonalData(response.data))
         .catch((err) => console.log(err))
@@ -57,7 +57,7 @@ export default function Profilepage(params) {
 
     toast
       .promise(
-        axios.post("http://localhost:3000/api/personaldetails", {
+        axios.post("https://lyft-beta.vercel.app//api/personaldetails", {
           ...personalData,
           email: data.user.email,
         }),

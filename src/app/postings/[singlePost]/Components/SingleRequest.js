@@ -7,11 +7,14 @@ import { FaArrowDown, FaArrowRight } from "react-icons/fa6";
 
 export default function SingleRequest({ data, _id }) {
   function approveRide() {
-    toast.promise(axios.patch(`http://localhost:3000/api/booking?id=${_id}`), {
-      loading: "Approving Ride",
-      success: "Ride Approved",
-      error: "Something wrong",
-    });
+    toast.promise(
+      axios.patch(`https://lyft-beta.vercel.app/api/booking?id=${_id}`),
+      {
+        loading: "Approving Ride",
+        success: "Ride Approved",
+        error: "Something wrong",
+      }
+    );
   }
   return (
     <div className="flex flex-col md:flex-row gap-4 shadow-md p-[1%] font-bold font-dm ">

@@ -28,7 +28,7 @@ export default function Signup() {
       return;
     }
     toast.promise(
-      axios.post("http://localhost:3000/api/signup/credentials", {
+      axios.post("https://lyft-beta.vercel.app/api/signup/credentials", {
         ...signUpData,
       }),
       {

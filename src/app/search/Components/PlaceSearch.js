@@ -23,7 +23,7 @@ export default function PlaceSearch() {
     setLoading(true);
 
     axios
-      .post("http://localhost:3000/api/search", {
+      .post("https://lyft-beta.vercel.app/api/search", {
         start: start.label,
         end: end.label,
         date,

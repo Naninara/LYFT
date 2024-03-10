@@ -20,9 +20,12 @@ export const options = {
     }),
     CredentailsProvider({
       async authorize(credentials) {
-        const response = await axios.post("http://localhost:3000/api/signin", {
-          ...credentials,
-        });
+        const response = await axios.post(
+          "https://lyft-beta.vercel.app//api/signin",
+          {
+            ...credentials,
+          }
+        );
 
         if (response.status == 200) {
           return response.data;
@@ -38,13 +41,16 @@ export const options = {
   callbacks: {
     async signIn({ user, account }) {
       if (account?.type === "oauth") {
-        await axios.post("http://localhost:3000/api/signup", {
+        await axios.post("https://lyft-beta.vercel.app/api/signup", {
           ...user,
           ...account,
         });
       }
 
       return user;
+    },
+    async credentials(user, acount, profile) {
+      return Promise.resolve(true);
     },
   },
 };
