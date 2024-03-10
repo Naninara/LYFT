@@ -17,6 +17,7 @@ export default function PublishComponent() {
   const [date, setDate] = useState(null);
   const [fair, setFair] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [time, setTime] = useState(null);
 
   const [personalDetails, setPersonalDetails] = useState({});
 
@@ -24,13 +25,13 @@ export default function PublishComponent() {
   const { data, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/signin?callbackurl=/publish");
+      redirect("/signin");
     },
   });
 
   //Function to Publish A Ride Into Public
   function PostRide() {
-    if (!start || !end || !date || !fair || !data.user.email) {
+    if (!start || !end || !date || !fair || !data.user.email || !time) {
       toast.error("All details must be filled");
       return;
     }
@@ -39,6 +40,7 @@ export default function PublishComponent() {
         start: start.label,
         end: end.label,
         date,
+        time,
         rideAmount: fair,
         postedEmail: data.user.email,
       }),
@@ -178,11 +180,14 @@ export default function PublishComponent() {
           type={"text"}
           className="w-auto  border-gray-200 p-[1%] rounded-md border-2 h-[39px] w-[250px]"
           placeholder="On When XX:YY am/pm"
+          onChange={(e) => {
+            setTime(e.target.value);
+          }}
         />
       </div>
       <div className="flex-col md:flex-row flex w-full items-center justify-center gap-9">
         <p>
-          By <b>{data.user.name}</b>
+          By <b>{personalDetails.name}</b>
         </p>
 
         <p className="flex items-center">

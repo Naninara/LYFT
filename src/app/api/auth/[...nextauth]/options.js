@@ -46,8 +46,5 @@ export const options = {
 
       return user;
     },
-    async session({ session, trigger, newSession }) {
-      return session;
-    },
   },
 };

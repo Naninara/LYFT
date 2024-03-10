@@ -15,7 +15,7 @@ export default function MobileNav() {
         />
       </div>
       {isOpen && (
-        <div className="items-center gap-3 absolute bg-white z-10 h-screen flex items-center left-0 w-full top-[56px] flex-col justify-center">
+        <div className="items-center gap-3 absolute bg-white h-screen flex items-center left-0 w-full top-[56px] flex-col justify-center">
           <p className="flex items-center gap-1 cursor-pointer">
             Publish A Ride <CiCirclePlus fontWeight={1000} size={20} />
           </p>

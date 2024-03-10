@@ -25,11 +25,12 @@ export async function POST(request) {
     await connectDb();
     const requestData = await request.json();
 
-    const { email, gender, vehicleNumber, vehicleType, phonenumber } =
+    const { email, gender, vehicleNumber, vehicleType, phonenumber, name } =
       requestData;
-    const data = await PersonalDetailsShema.updateOne(
+    console.log(name);
+    await PersonalDetailsShema.updateOne(
       { email: email },
-      { email, gender, vehicleNumber, vehicleType, phonenumber },
+      { email, gender, vehicleNumber, vehicleType, phonenumber, name },
       { upsert: true }
     )
       .then((response) => console.log(response))

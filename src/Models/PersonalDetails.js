@@ -8,6 +8,10 @@ const PersonalDetails = mongoose.Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
   vehicleNumber: {
     type: String,
     required: true,

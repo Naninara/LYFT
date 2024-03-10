@@ -6,13 +6,14 @@ export async function POST(request) {
     await connectDb();
 
     const requestData = await request.json();
-    const { start, end, date, postedEmail, rideAmount } = requestData;
+    const { start, end, date, postedEmail, rideAmount, time } = requestData;
     const isExist = await RideModel.findOne({
       start,
       end,
       date,
       postedEmail,
       rideAmount,
+      time,
     });
     if (isExist) {
       return new Response("Cool!! Ride Posted Already", { status: 409 });
@@ -23,6 +24,7 @@ export async function POST(request) {
       date,
       postedEmail,
       rideAmount,
+      time,
     });
 
     if (!response) {

@@ -9,6 +9,8 @@ import {
   CiLogin,
   CiLogout,
   CiSettings,
+  CiBookmark,
+  CiPaperplane,
 } from "react-icons/ci";
 import { options } from "../api/auth/[...nextauth]/options";
 import MobileNav from "./MobileNav";
@@ -41,6 +43,16 @@ export default async function Navbar() {
           <Link href={"/publish"}>
             <p className="flex items-center gap-1 cursor-pointer">
               Publish A Ride <CiCirclePlus fontWeight={1000} size={20} />
+            </p>
+          </Link>
+          <Link href={"/postings"}>
+            <p className="flex items-center gap-1 cursor-pointer">
+              Your Postings <CiPaperplane fontWeight={1000} size={20} />
+            </p>
+          </Link>
+          <Link href={"/bookings"}>
+            <p className="flex items-center gap-1 cursor-pointer">
+              Your Bookings <CiBookmark fontWeight={1000} size={20} />
             </p>
           </Link>
           {!session ? (

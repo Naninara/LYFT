@@ -48,7 +48,8 @@ export default function Profilepage(params) {
       !personalData?.phonenumber ||
       !personalData?.vehicleType ||
       !personalData?.gender ||
-      !personalData?.vehicleNumber
+      !personalData?.vehicleNumber ||
+      !personalData?.name
     ) {
       toast.error("All Fields Must Be filled");
       return;
@@ -85,8 +86,7 @@ export default function Profilepage(params) {
           </div>
           <div className="flex justify-between font-dm font-bold">
             <div className="flex">
-              <p className="hidden md:block">Logged In As:</p>
-              <p> {personalData?.email}</p>
+              <p className="text-sm text-red-600">Fill NA If Not Applicable*</p>
             </div>
             <button
               onClick={() => {
@@ -113,22 +113,18 @@ export default function Profilepage(params) {
               />
             </div>
             <div>
-              <p className="font-dm font-bold">Vehicle Type</p>
-              <select
+              <p className="font-dm font-bold">Enter Your Name</p>
+              <input
                 type={"text"}
                 required
-                className="w-[288px] md:w-[243px] h-[40px] border-2 border-black rounded-lg px-3"
-                placeholder="Enter Your Password"
-                name="vehicleType"
-                value={personalData?.vehicleType}
+                className="w-full h-[40px] border-2 border-black rounded-lg px-3"
+                name="name"
+                value={personalData?.name}
                 onChange={(e) => {
                   handleChange(e);
                 }}
-              >
-                <option>select one</option>
-                <option>Four Wheeler</option>
-                <option>Two Wheeler</option>
-              </select>
+                placeholder="Enter Your Name"
+              />
             </div>
           </div>
           <div className="flex gap-2 flex-col md:flex-row">
@@ -171,19 +167,39 @@ export default function Profilepage(params) {
               <label className="ml-2">Other</label>
             </div>
           </div>
-          <div>
-            <p className="font-dm font-bold">Enter Vehicle Number</p>
-            <input
-              type={"text"}
-              required
-              value={personalData?.vehicleNumber}
-              className="w-full h-[40px] border-2 border-black rounded-lg px-3"
-              placeholder="Enter Vehicle Number"
-              name="vehicleNumber"
-              onChange={(e) => {
-                handleChange(e);
-              }}
-            />
+          <div className="flex gap-2 flex-col md:flex-row">
+            <div>
+              <p className="font-dm font-bold">Enter Vehicle Number</p>
+              <input
+                type={"text"}
+                required
+                value={personalData?.vehicleNumber}
+                className="w-full h-[40px] border-2 border-black rounded-lg px-3"
+                placeholder="Enter Vehicle Number"
+                name="vehicleNumber"
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              />
+            </div>
+            <div>
+              <p className="font-dm font-bold">Vehicle Type</p>
+              <select
+                type={"text"}
+                required
+                className="w-[288px] md:w-[243px] h-[40px] border-2 border-black rounded-lg px-3"
+                placeholder="Enter Your Password"
+                name="vehicleType"
+                value={personalData?.vehicleType}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              >
+                <option>select one</option>
+                <option>Four Wheeler</option>
+                <option>Two Wheeler</option>
+              </select>
+            </div>
           </div>
           <div className="w-full mt-4">
             <button
