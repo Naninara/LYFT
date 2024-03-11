@@ -69,7 +69,7 @@ export default function PlaceSearch() {
         <input
           type={"date"}
           className="w-auto border-gray-200 p-[1%] rounded-md border-2 h-[39px]"
-          placeholder="On When"
+          placeholder="dd/mm/yy"
           onChange={(e) => setDate(e.target.value)}
         />
         <button

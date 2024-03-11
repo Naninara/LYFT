@@ -80,7 +80,7 @@ export default function PublishComponent() {
 
   if (!personalDetails) {
     return (
-      <div className="flex w-full items-center justify-center flex-col font-dm h-[30vh] p-8 gap-4 text-pretty">
+      <div className="flex w-full items-center justify-center flex-col font-dm  p-8 gap-4 text-pretty">
         <div className="p-[2%] pt-5 flex flex-col md:flex-row md:p-[2%] w-full items-center justify-center gap-4 ">
           <div className="flex items-center gap-2 w-full md:w-[400px]">
             <CiLocationOn size={25} />
