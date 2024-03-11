@@ -21,7 +21,7 @@ export const options = {
     CredentailsProvider({
       async authorize(credentials) {
         const response = await axios.post(
-          "https://lyft-beta.vercel.app//api/signin",
+          "https://lyft-beta.vercel.app/api/signin",
           {
             ...credentials,
           }
