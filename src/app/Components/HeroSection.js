@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function HeroSection() {
@@ -21,12 +22,16 @@ export default function HeroSection() {
           Sharing Is Caring..
         </h1>
         <div className="w-full flex gap-4">
-          <button className=" w-[150px] h-[60px] border-2 border-black bg-indigo-600 rounded-[48px] text-white hover:bg-white hover:text-black ">
-            Book A Drive
-          </button>
-          <button className="w-[150px] h-[60px]  rounded-[48px] text-black border-2 border-black  hover:bg-indigo-600 hover:text-white duration-500">
-            Publish A Ride
-          </button>
+          <Link href={"/search"}>
+            <button className=" w-[150px] h-[60px] border-2 border-black bg-indigo-600 rounded-[48px] text-white hover:bg-white hover:text-black ">
+              Book A Drive
+            </button>
+          </Link>
+          <Link href={"/publish"}>
+            <button className="w-[150px] h-[60px]  rounded-[48px] text-black border-2 border-black  hover:bg-indigo-600 hover:text-white duration-500">
+              Publish A Ride
+            </button>
+          </Link>
         </div>
       </div>
     </div>
