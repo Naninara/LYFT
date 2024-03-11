@@ -71,6 +71,7 @@ export default function PlaceSearch() {
           className="w-auto border-gray-200 p-[1%] rounded-md border-2 h-[39px]"
           placeholder="dd/mm/yy"
           onChange={(e) => setDate(e.target.value)}
+          min={new Date().toISOString().split("T")[0]}
         />
         <button
           className="h-[40px] w-[80px] bg-indigo-500 text-white rounded-[20px]"
