@@ -70,7 +70,7 @@ export default async function Navbar() {
           )}
         </div>
         <div className=" block md:hidden">
-          <MobileNav />
+          <MobileNav session={session} />
         </div>
       </div>
     </div>
