@@ -25,7 +25,7 @@ export default function MobileNav({ session }) {
         />
       </div>
       {isOpen && (
-        <div className="items-center gap-3 absolute bg-white h-screen flex items-center left-0 w-full top-[56px] flex-col justify-center">
+        <div className="items-center gap-3 absolute bg-white h-[90vh] flex items-center left-0 w-full top-[56px] flex-col justify-center">
           <Link
             href={"/publish"}
             onClick={() => {
