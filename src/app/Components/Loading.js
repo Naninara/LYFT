@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Loading() {
   return (
-    <div className="flex w-auto h-screen md:h-[30vh] justify-center items-center animate-ping">
+    <div className="flex overflow-hidden  h-screen md:h-[30vh] justify-center items-center animate-ping">
       <svg
         width="60"
         height="60"

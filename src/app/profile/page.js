@@ -196,6 +196,7 @@ export default function Profilepage(params) {
                 }}
               >
                 <option>select one</option>
+                <option>NA</option>
                 <option>Four Wheeler</option>
                 <option>Two Wheeler</option>
               </select>
