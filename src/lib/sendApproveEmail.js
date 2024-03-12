@@ -11,7 +11,7 @@ export default async function sendApproveEmail(
     host: "smtp.gmail.com",
     auth: {
       user: "lyftbeta@gmail.com",
-      pass: process.env.GMAIL_PASSWORD,
+      pass: "sbxa ncwt kcya lmkv",
     },
   });
 
