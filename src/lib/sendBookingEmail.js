@@ -3,9 +3,10 @@ export default async function SendBookingEmail(email, start, end) {
   const transporter = await nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
+    port: 465,
     auth: {
       user: "lyftbeta@gmail.com",
-      pass: process.env.GMAIL_PASSWORD,
+      pass: "sbxa ncwt kcya lmkv",
     },
   });
 
