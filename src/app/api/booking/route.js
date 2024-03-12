@@ -1,5 +1,9 @@
 import connectDb from "@/lib/connectDb";
+import sendApproveEmail from "@/lib/sendApproveEmail";
+import SendBookingEmail from "@/lib/sendBookingEmail";
 import BookingModel from "@/Models/BookingModel";
+import PersonalDetailsShema from "@/Models/PersonalDetails";
+import RideModel from "@/Models/RideModel";
 
 export async function POST(request) {
   try {
@@ -24,6 +28,8 @@ export async function POST(request) {
       postedEmail,
       RideId,
     });
+    const RideDetails = await RideModel.findById(RideId);
+    await SendBookingEmail(postedEmail, RideDetails.start, RideDetails.end);
 
     return Response.json(data, { status: 200 });
   } catch (err) {
@@ -39,10 +45,31 @@ export async function PATCH(request) {
 
     const id = url.searchParams.get("id");
 
+    const isAlreadyApproved = await BookingModel.findById(id);
+
+    if (isAlreadyApproved.status == "Approved!!") {
+      return new Response("Ride Already Approved", { status: 409 });
+    }
+
     const response = await BookingModel.findByIdAndUpdate(
       { _id: id },
       { status: "Approved!!" }
     );
+
+    const RideData = await RideModel.findById(response.RideId);
+
+    const OwnerData = await PersonalDetailsShema.findOne({
+      email: RideData.postedEmail,
+    });
+
+    await sendApproveEmail(
+      response.userEmail,
+      RideData.start,
+      RideData.end,
+      OwnerData.name,
+      OwnerData.phonenumber
+    );
+
     return Response.json(response, { status: 200 });
   } catch (error) {
     return Response.json(error, { status: 400 });

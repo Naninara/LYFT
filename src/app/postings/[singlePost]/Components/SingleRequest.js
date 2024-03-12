@@ -12,7 +12,7 @@ export default function SingleRequest({ data, _id }) {
       {
         loading: "Approving Ride",
         success: "Ride Approved",
-        error: "Something wrong",
+        error: "Ride Already Approved",
       }
     );
   }

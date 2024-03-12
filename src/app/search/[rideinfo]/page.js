@@ -1,6 +1,5 @@
-import { options } from "@/app/api/auth/[...nextauth]/options";
 import getRideDetails from "@/lib/getRideDetails";
-import { getServerSession } from "next-auth";
+
 import React from "react";
 import { CiClock1, CiLocationArrow1, CiLocationOn } from "react-icons/ci";
 import { FaArrowDown, FaArrowRight, FaClock } from "react-icons/fa6";
@@ -8,8 +7,6 @@ import RideBooking from "./components/RideBooking";
 
 export default async function page({ params: { rideinfo } }) {
   const data = await getRideDetails(rideinfo);
-
-  const session = await getServerSession(options);
 
   return (
     <div className="flex flex-col font-dm font-bold">

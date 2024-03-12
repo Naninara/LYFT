@@ -2,15 +2,15 @@
 import Loading from "@/app/Components/Loading";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 
-export default function RideBooking({ postedEmail, RideId }) {
-  const { data, status } = useSession({
+export default async function RideBooking({ postedEmail, RideId }) {
+  const { data, status } = await useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/signin?callbackurl=/profile");
+      redirect("/signin");
     },
   });
 
