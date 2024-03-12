@@ -49,7 +49,7 @@ export default function PublishComponent() {
         success: (response) => `${response.data}`,
         error: (err) =>
           `${
-            err.response.status == 409
+            err?.response?.status == 409
               ? "Cool!! Ride Already Posted"
               : "Something went wrong"
           }`,

@@ -27,7 +27,7 @@ export async function POST(request) {
 
     const { email, gender, vehicleNumber, vehicleType, phonenumber, name } =
       requestData;
-    console.log(name);
+
     await PersonalDetailsShema.updateOne(
       { email: email },
       { email, gender, vehicleNumber, vehicleType, phonenumber, name },

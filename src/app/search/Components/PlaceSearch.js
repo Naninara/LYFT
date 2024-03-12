@@ -14,7 +14,7 @@ export default function PlaceSearch() {
   const [isLoading, setLoading] = useState(false);
   const [ridesData, setRidesData] = useState(null);
 
-  function handleSearch() {
+  async function handleSearch() {
     if (!start || !end || !date) {
       toast.error("Select All Fields");
       return;
@@ -22,7 +22,7 @@ export default function PlaceSearch() {
 
     setLoading(true);
 
-    axios
+    await axios
       .post("https://lyft-beta.vercel.app/api/search", {
         start: start.label,
         end: end.label,

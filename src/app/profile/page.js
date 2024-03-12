@@ -135,7 +135,7 @@ export default function Profilepage(params) {
                 required
                 className="w-full  border-2 border-black rounded-lg px-3"
                 name="gender"
-                value={"male"}
+                value="male"
                 onChange={(e) => {
                   handleChange(e);
                 }}
@@ -147,7 +147,7 @@ export default function Profilepage(params) {
                 required
                 className="w-full border-2 border-black rounded-lg px-3 ml-2"
                 name="gender"
-                value={"female"}
+                value="female"
                 onChange={(e) => {
                   handleChange(e);
                 }}
@@ -159,7 +159,7 @@ export default function Profilepage(params) {
                 required
                 className="w-full  border-2 border-black rounded-lg px-3 ml-2"
                 name="gender"
-                value={"other"}
+                value="other"
                 onChange={(e) => {
                   handleChange(e);
                 }}

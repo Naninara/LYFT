@@ -1,13 +1,19 @@
 import connectDb from "@/lib/connectDb";
+import sendEmail from "@/lib/sendEmail";
 
 export async function GET() {
-  await connectDb()
-    .then(() => {
-      console.log("DB Connected");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  try {
+    await connectDb();
 
-  return new Response("Something ");
+    await sendEmail("nmvmanikanta@gmail.com")
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
+    console.log("First");
+    return new Response("Something");
+  } catch (error) {
+    console.log(error);
+    return new Response("Something Wromg");
+  }
 }
