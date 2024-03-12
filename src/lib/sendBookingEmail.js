@@ -6,7 +6,7 @@ export default async function SendBookingEmail(email, start, end) {
     port: 465,
     auth: {
       user: "lyftbeta@gmail.com",
-      pass: "sbxa ncwt kcya lmkv",
+      pass: process.env.GMAIL_PASSWORD,
     },
   });
 

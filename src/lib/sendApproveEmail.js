@@ -12,7 +12,7 @@ export default async function sendApproveEmail(
     port: 465,
     auth: {
       user: "lyftbeta@gmail.com",
-      pass: "sbxa ncwt kcya lmkv",
+      pass: process.env.GMAIL_PASSWORD,
     },
   });
 
