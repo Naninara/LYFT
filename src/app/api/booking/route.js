@@ -29,7 +29,7 @@ export async function POST(request) {
       RideId,
     });
     const RideDetails = await RideModel.findById(RideId);
-    // await SendBookingEmail(postedEmail, RideDetails.start, RideDetails.end);
+    await SendBookingEmail(postedEmail, RideDetails.start, RideDetails.end);
 
     return Response.json(data, { status: 200 });
   } catch (err) {
@@ -62,13 +62,13 @@ export async function PATCH(request) {
       email: RideData.postedEmail,
     });
 
-    // await sendApproveEmail(
-    //   response.userEmail,
-    //   RideData.start,
-    //   RideData.end,
-    //   OwnerData.name,
-    //   OwnerData.phonenumber
-    // );
+    await sendApproveEmail(
+      response.userEmail,
+      RideData.start,
+      RideData.end,
+      OwnerData.name,
+      OwnerData.phonenumber
+    );
 
     return Response.json(response, { status: 200 });
   } catch (error) {
